@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 
 from domain.question import question_router
+
+from stream import get_stream_video
 
 app = FastAPI()
 
@@ -18,3 +21,11 @@ app.add_middleware(
 )
 
 app.include_router(question_router.router)
+
+# openCV에서 이미지 불러오는 함수
+def video_streaming():
+    return get_stream_video()
+
+@app.get("/video")
+def video():
+    return StreamingResponse(video_streaming(), media_type="multipart/x-mixed-replace; boundary=frame")
