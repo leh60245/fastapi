@@ -31,7 +31,7 @@ app.add_middleware(
 class ImageData(BaseModel):
     image_str: str
 
-model = load_model("model.h5", compile=False)
+model = load_model("b_model.h5", compile=False)
 
 @app.post("/uploadfile/")
 async def create_upload_file(image_data: ImageData):
@@ -53,6 +53,6 @@ async def create_upload_file(image_data: ImageData):
             if max_value < value:
                 max_idx = idx
                 max_value = value
-        return {"predict_class": max_idx + 1, "accuracy": max_value, "2": result_list[1]}
+        return {"predict_class": max_idx, "max_accuracy": max_value, "all_accuracy":result_list}
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"이미지 처리 실패: {str(e)}")
