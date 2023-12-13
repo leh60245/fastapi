@@ -59,6 +59,6 @@ async def create_upload_file(image_data: ImageData):
             predicted_class = 2
         else:
             predicted_class = -1
-        return {"predicted_class": predicted_class}
+        return {"predicted_class": predicted_class, "acc_arr": result_list}
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"이미지 처리 실패: {str(e)}")
