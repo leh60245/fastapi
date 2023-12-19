@@ -7,10 +7,6 @@ from pydantic import BaseModel
 from tensorflow.keras.models import load_model
 from starlette.middleware.cors import CORSMiddleware
 
-# from domain.question import question_router
-
-#from stream import get_stream_video
-
 app = FastAPI()
 
 origins = [
